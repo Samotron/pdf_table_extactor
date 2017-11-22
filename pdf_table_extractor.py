@@ -2,6 +2,7 @@ from tabula import read_pdf
 import pandas as pd
 from tkinter import filedialog
 import os
+import webbrowser
 
 class pdf_table_reader():
 
@@ -9,6 +10,15 @@ class pdf_table_reader():
 
     def __init__(self, export_format):
         self.export = export_format
+
+
+    def check_tabular_java_installed(self):
+        try:
+            read_pdf('dependencies/ast_sci_data_tables_sample.pdf')
+            print('All working okay')
+        except FileNotFoundError:
+            print('JAVA not correctly installed')
+            webbrowser.open(r'https://github.com/chezou/tabula-py')
 
 
     def get_file_name(self):
@@ -22,7 +32,7 @@ class pdf_table_reader():
         return os.path.dirname(self.file_link)
 
     def pdf_table_to_df(self):
-        df = read_pdf(self.get_file_name(), multiple_tables=True, pages=2)
+        df = read_pdf(self.get_file_name(), multiple_tables=True, pages='all')
         print(type(df))
         return df
 
@@ -51,4 +61,5 @@ class pdf_table_reader():
 
 if __name__ == "__main__":
     a = pdf_table_reader(export_format='excel')
+    a.check_tabular_java_installed()
     a.df_to_output()
