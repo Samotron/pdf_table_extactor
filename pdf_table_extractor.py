@@ -50,10 +50,15 @@ class pdf_table_reader():
             writer.save()
 
         elif self.export == 'csv':
-            df.to_csv(os.path.join(self.get_output_folder(), 'CSV_Output.csv'), sep='   ')
+            df.to_csv(os.path.join(self.get_output_folder(), 'PDF_Output.csv'), sep='   ')
 
         elif self.export == 'json':
-            df.to_json(os.path.join(self.get_output_folder(), 'JSON_Output.json'))
+            df.to_json(os.path.join(self.get_output_folder(), 'PDF_Output.json'))
+
+        elif self.export == 'sql':
+            # TODO Not yet implemented
+
+
 
         else:
             print('Incorrect export format specified')

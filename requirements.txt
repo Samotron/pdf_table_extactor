@@ -1,0 +1,2 @@
+tabula-py==1.00
+pandas==0.21.0
